@@ -1,0 +1,84 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+body {
+  margin: auto;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  min-width: 800px;
+  min-height: 100vh;
+}
+
+
+#root {
+  width: 50%;
+}
+
+main {
+    margin: 1rem;
+}
+
+.memotest {
+  display: "grid", 
+  grid-gap: "10px",
+  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+}
+
+.inputs {
+  margin: 0 auto;
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+input {
+  height: 30px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+input:disabled {
+  background-color: #666;
+  color: #fff;
+}
+
+button {
+  cursor: pointer;
+  padding: 0 10px;
+  background-color: #666;
+  border-radius: 5px;
+  color: #fff;
+}
+
