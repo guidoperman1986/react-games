@@ -82,3 +82,13 @@ button {
   color: #fff;
 }
 
+.playButton {
+  width: 100px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.submit {
+  padding: 7px;
+  margin-left: 5px;
+}

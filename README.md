@@ -2,9 +2,9 @@
 
 - Memotest
 
-- Words per Second
+- Words per Minute
 
--
+- Pokemon
 
 
 # Download it and execute
