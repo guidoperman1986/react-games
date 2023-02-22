@@ -35,7 +35,7 @@ export const WordsPerMinute = () => {
   }
 
   function handleInit() {
-    setTime(20);
+    setTime(60);
     setCharacterCount(0);
     setWord(randomWord)
   }
