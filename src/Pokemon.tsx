@@ -43,6 +43,11 @@ export const Pokemon = () => {
 
   }
 
+  function handleReload() {
+    toggleWon(false); 
+    setMatch(Math.floor(Math.random() * POKEMONS.length));
+  }
+
   return (
     <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
       <img 
@@ -54,7 +59,7 @@ export const Pokemon = () => {
 
       {
         hasWon 
-          ? <button style={{height: "40px", width: "50%"}} onClick={()=>(toggleWon(false), setMatch(Math.floor(Math.random() * POKEMONS.length)))}>Play</button>
+          ? <button style={{height: "40px", width: "50%"}} onClick={()=> handleReload }>Play</button>
           : <form action="" onSubmit={handleSubmit} style={{width: "50%", display: "flex", justifyContent: "space-around"}}>
               <input type="text" name="pokemon" />
               <button type="submit">Submit</button>
