@@ -54,7 +54,7 @@ export const WordsPerMinute = () => {
       {
       Boolean(time) ? 
         <>
-          <h1 style={{fontSize: 48}}>{word}</h1>
+          <h1 style={{fontSize: 48, textTransform: "capitalize"}}>{word}</h1>
           <h3>Remaining time: <span style={{ color: time < 10 ? 'red' : ''}}>{time}</span></h3>
           <form onSubmit={handleSubmit}>
             <input type="text" autoFocus onChange={(e)=>setBuffer(e.target.value)} value={buffer}/>
