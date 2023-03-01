@@ -92,3 +92,20 @@ button {
   padding: 7px;
   margin-left: 5px;
 }
+
+.link {
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+  border: 1px solid #fff;
+  padding: 15px;
+  margin: 0 15px;
+  font-weight: bold;
+  font-family: inherit;
+  transition: all 1s ease;
+}
+
+.link:hover {
+  background-color: #fff;
+  color: #242424;
+}
