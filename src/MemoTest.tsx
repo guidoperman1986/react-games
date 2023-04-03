@@ -18,11 +18,15 @@ const IMAGES = [
 
 export const Memotest = () => {;
   const [playerNumber, setPlayerNumber] = useState<number>(1);
-  const [player1, setPlayer1]   = useState<{name: string, points: number}>({name: '', points: 0});
-  const [player2, setPlayer2]   = useState<{name: string, points: number}>({name: '', points: 0});
-  const [started, setStarted]   = useState<boolean>(false);
-  const [guessed, setGuessed]   = useState<string[]>([])
-  const [selected, setSelected] = useState<string[]>([])
+  const [player1, setPlayer1]     = useState<{name: string, points: number}>({name: '', points: 0});
+  const [player2, setPlayer2]     = useState<{name: string, points: number}>({name: '', points: 0});
+  const [started, setStarted]     = useState<boolean>(false);
+  const [guessed, setGuessed]     = useState<string[]>([])
+  const [selected, setSelected]   = useState<string[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError]         = useState(false)
+
+  
 
   useEffect(() => {
     if (selected.length === 2) {
@@ -50,65 +54,84 @@ export const Memotest = () => {;
       player1 > player2 ? alert(`${player1} wins`) : alert(`${player2} wins`)
       location.reload()
     }
-  }, [guessed])  
+  }, [guessed])   
+
+  function handleImageError() {
+    setError(true);
+  }
 
   return (
     <>
-      <div className='inputs'>
-        <input 
-          type="text" 
-          disabled={started} 
-          placeholder='Player 1' 
-          onKeyUp={(e) => setPlayer1({name: (e.target as HTMLInputElement).value, points: 0})}          
-        />
-        <div>{ player1.points }</div>
-
-        <input 
-          type="text" 
-          disabled={started} 
-          placeholder='Player 2' 
-          onKeyUp={(e) => setPlayer2({name: (e.target as HTMLInputElement).value, points: 0})}          
-        />        
-        <div>{ player2.points }</div>
-
-        <button onClick={() => (!started && player1.name !== "" && player2.name !== "") && setStarted(true)}>
-          Comenzar !
-        </button>
-      </div>
-      
-      <ul 
-        style={{
-          marginTop: "10px",
-          display: "grid", 
-          gridGap: "10px",
-          gridTemplateColumns: "repeat(auto-fill, minmax(128px, 1fr))" 
-        }}
-      >
+      <div>
         {
-          IMAGES.map((image) => {
-            const [,url] = image.split('|');
-            
-            return( 
+          !isLoading && !error
+            ? <>
+                <div className='inputs'>
+                  <input 
+                    type="text" 
+                    disabled={started} 
+                    placeholder='Player 1' 
+                    onKeyUp={(e) => setPlayer1({name: (e.target as HTMLInputElement).value, points: 0})}          
+                  />
+                  <div>{ player1.points }</div>
 
-                  <li 
-                    onClick={()=> started && selected.length < 2 && setSelected((selected)=>selected.concat(image))}
-                    style={{
-                      padding: 12, 
-                      border: "1px solid #666", 
-                      borderRadius: 12, 
-                      cursor: "pointer"
-                    }} 
-                    key={image}>
-                    <img src={selected.includes(image) || guessed.includes(image) 
-                        ? url
-                        :  "https://icongr.am/clarity/search.svg?size=128&color=currentColor"
-                    } alt="" />
-                  </li>
+                  <input 
+                    type="text" 
+                    disabled={started} 
+                    placeholder='Player 2' 
+                    onKeyUp={(e) => setPlayer2({name: (e.target as HTMLInputElement).value, points: 0})}          
+                  />        
+                  <div>{ player2.points }</div>
 
-            )
-          })
+                  <button onClick={() => (!started && player1.name !== "" && player2.name !== "") && setStarted(true)}>
+                    Comenzar !
+                  </button>
+                </div>
+                
+                <ul 
+                  style={{
+                    marginTop: "10px",
+                    display: "grid", 
+                    gridGap: "10px",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(128px, 1fr))" 
+                  }}
+                >
+                  {
+                    IMAGES.map((image,idx) => {
+                      const [,url] = image.split('|');
+
+                      return( 
+                            <li 
+                              onClick={()=> started && selected.length < 2 && setSelected((selected)=>selected.concat(image))}
+                              style={{
+                                padding: 12, 
+                                border: "1px solid #666", 
+                                borderRadius: 12, 
+                                cursor: "pointer"
+                              }} 
+                              key={image}>
+                              <img onError={handleImageError} src={selected.includes(image) || guessed.includes(image) 
+                                  ? url
+                                  :  "https://icongr.am/clarity/search.svg?size=128&color=currentColor"
+                              } alt="" />
+                            </li>
+                      )
+
+                      
+                    })
+                  }
+                </ul>
+              </>
+            : error ?
+                  <div className='error-imgs'>Error when loading images, please try again later</div>
+                  : <div className='loading'>
+                      Loading...
+                      {
+                        error && <span className='error-imgs'>Some images couldn't load. Please try this game later.</span>
+                      }
+                    </div>
         }
-      </ul>
+      </div>
     </>
   )
 }
